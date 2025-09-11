@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="no"> 
+<head>
+    <meta charset="UTF-8">
+    <title>Rainy Days | Home</title>
+    <meta name="description" content="Welcome to Rainy Days Products – your go-to destination for high-quality outdoor jackets and gear." />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="Style.css">
+</head>
+<body>
+    <header class="header">
+    </header>
+
+        <div class="home-text">
+            <a href="index.html">
+                <h1>Home</h1>
+            </a>
+        </div>
+        <div class="gender-text">
+            <h2>Men Women</h2>
+        </div>
+        <div class="search-container">
+            <input type="text" placeholder="Søk..." class="search-input">
+        </div>
+    </div>
+    <div class="search-container">
+        <input type="text" placeholder="Søk..." class="search-input">
+    </div>
+    <div class="icons-container">
+        <img src="Icons/shoppingbag.svg" alt="Shopping bag" class="icon">
+        <img src="Icons/profil icon.svg" alt="Profile" class="icon">
+        <img src="Icons/Map pin.svg" alt="Map pin" class="icon">
+    </div>
+    <div class="line"></div>
+    </div>
+
+    <main>
+        <section class="season">
+            <h2>Thank you for purchase 🎉</h2>
+            <p>Her er produktene du har kjøpt:</p>
+        </section>
+        <div class="checkout-products-container"></div>
+        <div class="button-container">
+            <a href="index.html">
+                <button>Fortsett å handle</button>
+            </a>
+        </div>
+    </main>
+        
+    <script>
+        const purchasedProducts = JSON.parse(localStorage.getItem('purchasedCart')) || [];
+        const container = document.querySelector('.checkout-products-container');
+    
+        container.innerHTML = '';
+    
+        if (purchasedProducts.length === 0) {
+            container.innerHTML = '<p>Du har ikke kjøpt noe.</p>';
+        } else {
+            purchasedProducts.forEach(product => {
+                const item = document.createElement('div');
+                item.classList.add('checkout-item');
+                item.innerHTML = `
+                    <img src="${product.image.url}" alt="${product.image.alt}">
+                    <div class="text">
+                        <h3>${product.title}</h3>
+                        <p>${product.discountedPrice ? product.discountedPrice.toFixed(2) : product.price.toFixed(2)} kr</p>
+                    </div>
+                `;
+                container.appendChild(item);
+            });
+        }
+    
+        
+        localStorage.removeItem('purchasedCart');
+    </script>
+    
+    
+    <footer>    
+        <div class="line"></div>
+        <div class="footer-container">
+            <img src="images/RainyDays_Logo.png" alt="logo">
+    
+             <div class="info">
+            <p>
+                Adress: <br>
+                Olaveien 1 <br>
+                0000 Oslo <br>
+                Norway
+            </p>
+            </div>
+    
+            <div class="support">
+                <img src="Icons/Support-icon.svg" alt="Button for support" class="icon">
+            </div>
+        </div>
+    </footer>  
+    
