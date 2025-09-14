@@ -1,12 +1,12 @@
-// Hent handlekurv fra localStorage
+
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-// Hent DOM-elementer
+
 const container = document.querySelector('.Checkout-items-container');
 const totalElement = document.querySelector('.total-amount');
 const checkoutBtn = document.getElementById('checkout-btn');
 
-// Funksjon for å vise handlekurven
+
 function displayCart() {
     container.innerHTML = '';
 
@@ -32,7 +32,7 @@ function displayCart() {
         container.appendChild(item);
     });
 
-    // Legg til event listener på fjern-knappene
+  
     const removeButtons = document.querySelectorAll('.remove-btn');
     removeButtons.forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -46,27 +46,27 @@ function displayCart() {
     updateCartCount();
 }
 
-// Fjern vare fra handlekurven
+
 function removeFromCart(index) {
     cart.splice(index, 1);
     localStorage.setItem('cart', JSON.stringify(cart));
     displayCart();
 }
 
-// Oppdater totalbeløp
+
 function updateTotal() {
     const total = cart.reduce((sum, product) => sum + (product.discountedPrice || product.price), 0);
     totalElement.textContent = `Total: ${total.toFixed(2)} kr`;
 }
 
-// Aktiver/deaktiver checkout-knapp
+
 function toggleCheckoutButton() {
     if (checkoutBtn) {
         checkoutBtn.disabled = cart.length === 0;
     }
 }
 
-// Tøm handlekurv-knapp
+
 const clearCartBtn = document.createElement('button');
 clearCartBtn.textContent = 'Tøm handlekurv';
 clearCartBtn.classList.add('clear-cart-btn');
@@ -78,7 +78,7 @@ clearCartBtn.addEventListener('click', () => {
     displayCart();
 });
 
-// Oppdater teller i header
+
 function updateCartCount() {
     const countElement = document.querySelector('.cart-count');
     if (countElement) {
@@ -86,20 +86,20 @@ function updateCartCount() {
     }
 }
 
-// Checkout-knapp
+
 checkoutBtn.addEventListener('click', () => {
     if (cart.length > 0) {
-        // Lagre kjøpte varer midlertidig, hvis du vil vise dem på thanks-siden
+
         localStorage.setItem('purchasedCart', JSON.stringify(cart));
 
-        // Tøm handlekurv
+
         cart = [];
         localStorage.setItem('cart', JSON.stringify(cart));
 
-        // Gå til takk-siden
+
         window.location.href = 'thanks.html';
     }
 });
 
-// Vis handlekurv når siden lastes
+
 displayCart();
